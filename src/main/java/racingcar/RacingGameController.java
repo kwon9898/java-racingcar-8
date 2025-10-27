@@ -13,6 +13,7 @@ public class RacingGameController {
 			List<Car> car = createCarFromInput();
 			int round = getRoundFromInput();
 			runRace(car,round);
+			announceWinner(car);
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			throw e;
@@ -38,6 +39,7 @@ public class RacingGameController {
 	private void runRace(List<Car> car, int round) {
 		for(int i = 0 ; i < round ; i++) {
 			raceOneRound(car);
+			OutPutRacingGame.printRoundResult(car);
 		}
 	}
 	
