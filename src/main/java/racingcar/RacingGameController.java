@@ -50,4 +50,27 @@ public class RacingGameController {
 	private int randomNumberOfRace() {
 		return Randoms.pickNumberInRange(0, 9);
 	}
+	
+	private void announceWinner(List<Car> car) {
+		int maxPosition = findMaxPosition(car);
+		List<String> winner = findWinnerName(car, maxPosition);
+		OutPutRacingGame.printWinner(winner);
+	}
+	
+	private int findMaxPosition(List<Car> car) {
+		int maxPosition = 0;
+		for (Car cars : car) {
+			if(cars.getPosition() > maxPosition) {
+				maxPosition = cars.getPosition();
+			}
+		}
+		return maxPosition;
+	}
+	
+	private List<String> findWinnerName(List<Car> car, int maxPosition){
+		return car.stream()
+				.filter(cars -> cars.getPosition() == maxPosition)
+				.map(Car::getName)
+				.collect(Collectors.toList());
+	}
 }
